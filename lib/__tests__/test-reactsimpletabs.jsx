@@ -99,21 +99,21 @@ describe('Tabs', function() {
 
     it('changes the tabActive if it receives new props', function(){
       var find = TU.findRenderedDOMComponentWithClass;
-      var instance = React.render(
+      var instance = TU.renderIntoDocument(
         <Tabs tabActive={2}>
           <Tabs.Panel title='item1'>content1</Tabs.Panel>
           <Tabs.Panel title='item2'>content2</Tabs.Panel>
-        </Tabs>, document.body
+        </Tabs>
       );
       var menuItem = find(instance, 'tabs-menu-item is-active');
       var pannel = find(instance, 'tab-panel');
       expect(pannel.getDOMNode().children[0].innerHTML).toEqual('content2');
       expect(menuItem.getDOMNode().children[0].innerHTML).toEqual('item2');
-      instance = React.render(
+      var instance = React.render(
         <Tabs tabActive={1}>
           <Tabs.Panel title='item1'>content1</Tabs.Panel>
           <Tabs.Panel title='item2'>content2</Tabs.Panel>
-        </Tabs>, document.body
+        </Tabs>, instance.getDOMNode().parentNode
       );
       menuItem = find(instance, 'tabs-menu-item is-active');
       pannel = find(instance, 'tab-panel');
